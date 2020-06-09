@@ -3,8 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
 };
+
+
+/*
+Gateway
+
+http://formaciongate-pruebas-jjcc114.cm-pre.jccm.es
+
+Zuul:
+https://formacion-pruebas-jjcc114.cm-pre.jccm.es
+
+
+*/
+export const URL_BASE = 'https://formaciongate-pruebas-jjcc114.cm-pre.jccm.es';
+//export const URL_BASE = 'https://formacion-pruebas-jjcc114.cm-pre.jccm.es';
+export const API_ALUMNOS = '/api/alumnos';
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -1,0 +1,58 @@
+<div class="card bg-light mb-3 animated fadeIn">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+      
+
+        <form ngNativeValidate #forma="ngForm">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text"
+                    name="nombre"
+                    id="nombre"
+                    required
+                    class="form-control"
+                    [(ngModel)]="alumno.nombre">
+                    <div *ngIf="error && error.nombre" class="alert alert-danger">
+                        {{ error.nombre }}
+                   </div>
+            </div>
+
+            <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text"
+                    name="apellidos"
+                    id="apellidos"
+                    required
+                    class="form-control"
+                    [(ngModel)]="alumno.apellidos">
+                <div *ngIf="error && error.apellidos" class="alert alert-danger">
+                     {{ error.apellidos }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"
+                required
+                    name="email"
+                    id="email"
+                    class="form-control"
+                    [(ngModel)]="alumno.email">
+                    <div *ngIf="error && error.email" class="alert alert-danger">
+                        {{ error.email }}
+                   </div>
+            </div>
+
+            <div class="form-group">
+                <button  [disabled]="!forma.valid"
+                type="button" class="btn btn-primary mx-2"
+                (click)="alumno.id? editar(): crear()"
+                >{{ alumno.id? 'Actualizar': 'Crear' }}</button>
+                <button class="btn btn-success" routerLink="/alumnos">Volver</button>
+            </div>
+
+        </form>
+     
+    </div>
+  </div>
+  
