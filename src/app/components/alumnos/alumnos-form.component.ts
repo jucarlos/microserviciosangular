@@ -16,6 +16,8 @@ export class AlumnosFormComponent implements OnInit {
 
   alumno: Alumno = new Alumno();
 
+  fotoSeleccionada: File;
+
   error: any;
 
 
@@ -34,35 +36,83 @@ export class AlumnosFormComponent implements OnInit {
   }
 
   crear() {
-    this.alumnoService.crear( this.alumno ).subscribe( alumno => {
-      // console.log ( alumno );
-      Swal.fire(
-        'Nuevo!',
-        'Alumno Creado',
-        'success'
-      );
-      this.router.navigate(['/alumnos']);
-    }, error => {
-      if ( error.status === 400 ){
-        error = this.error;
-      }
-    });
+
+    if ( !this.fotoSeleccionada ) {
+      this.alumnoService.crear( this.alumno ).subscribe( alumno => {
+        // console.log ( alumno );
+        Swal.fire(
+          'Nuevo!',
+          'Alumno Creado',
+          'success'
+        );
+        this.router.navigate(['/alumnos']);
+      }, error => {
+        if ( error.status === 400 ){
+          error = this.error;
+        }
+      });
+    } else {
+      this.alumnoService.crearConFoto( this.alumno, this.fotoSeleccionada ).subscribe( alumno => {
+        // console.log ( alumno );
+        Swal.fire(
+          'Nuevo!',
+          'Alumno Creado',
+          'success'
+        );
+        this.router.navigate(['/alumnos']);
+      }, error => {
+        if ( error.status === 400 ){
+          error = this.error;
+        }
+      });
+
+    }
+
+
   }
 
   editar(){
-    this.alumnoService.editar( this.alumno ).subscribe( alumno => {
-      // console.log ( alumno );
-      Swal.fire(
-        'Actualizado!',
-        'Alumno Actualizado',
-        'success'
-      );
-      this.router.navigate(['/alumnos']);
-    }, error => {
-      if ( error.status === 400 ){
-        error = this.error;
-      }
-    });
+
+
+    if ( !this.fotoSeleccionada ) {
+
+      this.alumnoService.editar( this.alumno ).subscribe( alumno => {
+        // console.log ( alumno );
+        Swal.fire(
+          'Actualizado!',
+          'Alumno Actualizado',
+          'success'
+        );
+        this.router.navigate(['/alumnos']);
+      }, error => {
+        if ( error.status === 400 ){
+          error = this.error;
+        }
+      });
+
+    } else {
+
+      this.alumnoService.editarConFoto( this.alumno ,this.fotoSeleccionada).subscribe( alumno => {
+        // console.log ( alumno );
+        Swal.fire(
+          'Actualizado!',
+          'Alumno Actualizado',
+          'success'
+        );
+        this.router.navigate(['/alumnos']);
+      }, error => {
+        if ( error.status === 400 ){
+          error = this.error;
+        }
+      });
+
+    }
+
+  }
+
+  seleccionarFoto( evento ) {
+    // console.log( evento );
+    this.fotoSeleccionada = evento.target.files[0];
   }
 
 }

@@ -1,5 +1,6 @@
+import { Generic } from '../interfaces/generic';
 
-export class Alumno {
+export class Alumno implements Generic{
 
     id: number;
     nombre: string;

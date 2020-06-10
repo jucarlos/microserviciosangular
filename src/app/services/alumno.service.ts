@@ -8,8 +8,8 @@ import { URL_BASE, API_ALUMNOS } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AlumnoService {
 
+export class AlumnoService{
 
   private endPoint = URL_BASE + API_ALUMNOS;
 
@@ -28,6 +28,8 @@ export class AlumnoService {
     const params = new HttpParams()
       .set('page', page)
       .set('size', size);
+
+    // console.log( this.endPoint );
 
     return this.http.get<any>( `${this.endPoint}/pagina`, { params } );
   }
@@ -49,6 +51,34 @@ export class AlumnoService {
 
   public eliminar( id: number ): Observable<void>{
     return this.http.delete<void>(`${this.endPoint}/${id}`);
+  }
+
+  public crearConFoto( alumno: Alumno, archivo: File): Observable<Alumno> {
+
+    const formData = new FormData();
+
+    formData.append('archivo', archivo);
+    formData.append('nombre', alumno.nombre);
+    formData.append('apellidos', alumno.apellidos);
+    formData.append('email', alumno.email);
+
+    return this.http.post<Alumno>(
+        this.endPoint + '/crear-con-foto',
+        formData );
+  }
+
+  public editarConFoto( alumno: Alumno, archivo: File): Observable<Alumno> {
+
+    const formData = new FormData();
+
+    formData.append('archivo', archivo);
+    formData.append('nombre', alumno.nombre);
+    formData.append('apellidos', alumno.apellidos);
+    formData.append('email', alumno.email);
+
+    return this.http.put<Alumno>(
+        `${this.endPoint}/editar-con-foto/${alumno.id}`,
+        formData );
   }
 
 

@@ -4,6 +4,7 @@ import { AlumnoService } from '../../services/alumno.service';
 
 import Swal from 'sweetalert2';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { URL_BASE, API_ALUMNOS } from '../../../environments/environment';
 
 @Component({
   selector: 'app-alumnos',
@@ -13,6 +14,8 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
 export class AlumnosComponent implements OnInit {
 
   titulo = 'Listado de Alumnos';
+
+  ruta = URL_BASE + API_ALUMNOS;
 
   alumnos: Alumno[] = [];
 
